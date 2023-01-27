@@ -9,7 +9,16 @@ function selectCountries(correctAnswer) {
 
   if (toggleUS === false) {
     // Create answer choices array for countries and add correct answer
-    const selectedAnswers = [correctAnswer];
+    let selectedAnswers = [correctAnswer];
+
+    for (country in worldFlags) {
+      if (worldFlags[country][0] === correctAnswer) {
+        selectedAnswers = worldFlags[country][4];
+        selectedAnswers.push(correctAnswer);
+        break;
+      }
+    }
+
     // Loop until 10 answer options are in the array
     while (selectedAnswers.length < 10) {
       // Grab random element from worldFlags array
