@@ -311,9 +311,11 @@ clickMask.addEventListener('keydown', function (event) {
 // Handle answer selection and game over
 const checkAnswer = (selectedAnswer, selectedButton) => {
 
+  let answeredCorrect = false;
   const question = bank.questions[currentQuestionIndex];
   // If answer is correct (allow typos with levenshtein distance <= 2)
   if (levenshtein(selectedAnswer.toUpperCase(), question.correctAnswer.toUpperCase()) <= 2) {
+    answeredCorrect = true;
 
     // Make correct answer button green
     if (/* Multiple choice condition */ !answersContainer.classList.contains('hide')) {
@@ -408,8 +410,12 @@ const checkAnswer = (selectedAnswer, selectedButton) => {
 
   } else {
 
-    // Enable "click anywhere to continue"
-    clickMask.classList.remove('hide');
+    if (!answeredCorrect) {
+      // Enable "click anywhere to continue"
+      clickMask.classList.remove('hide');
+    } else {
+      showQuestion();
+    }
   }
 };
 
