@@ -13,8 +13,9 @@ function selectCountries(correctAnswer) {
 
     for (country in worldFlags) {
       if (worldFlags[country][0] === correctAnswer) {
-        selectedAnswers = worldFlags[country][4];
-        selectedAnswers.push(correctAnswer);
+        for (answer in worldFlags[country][4] ) {
+          selectedAnswers.push(worldFlags[country][4][answer]);
+        }
         break;
       }
     }
